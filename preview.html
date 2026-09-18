@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>GitHub 主页预览</title>
+<style>
+  body { margin: 0; font-family: -apple-system, sans-serif; display: flex; gap: 24px; padding: 24px; justify-content: center; }
+  .pane { width: 960px; }
+  .pane.dark { background: #0d1117; }
+  .readme { max-width: 880px; margin: 0 auto; padding: 32px 16px; }
+  .readme img, .readme picture img { width: 100%; display: block; margin: 0 0 4px; }
+  .label { text-align: center; font: 12px monospace; color: #888; padding: 8px; }
+</style>
+</head>
+<body>
+  <div class="pane">
+    <div class="label">light theme</div>
+    <div class="readme" id="light"></div>
+  </div>
+  <div class="pane dark">
+    <div class="label" style="color:#8b949e">dark theme</div>
+    <div class="readme" id="dark"></div>
+  </div>
+<script>
+const sections = {
+  chrome: '', hero: '', 'section-featured': '',
+  'repo-bookmanagesystem': 'https://github.com/alexyunyun/BookManageSystem',
+  'repo-unicode-symbols': 'https://github.com/alexyunyun/unicode-symbols',
+  'repo-jwordscards': 'https://github.com/alexyunyun/JwordsCards',
+  'section-tech-stack': '', 'tech-stack': '',
+  'section-contributions': '', contributions: '', footer: ''
+};
+for (const [theme, id] of [['light', 'light'], ['dark', 'dark']]) {
+  const root = document.getElementById(id);
+  for (const [name, href] of Object.entries(sections)) {
+    const pic = document.createElement('picture');
+    const img = document.createElement('img');
+    img.src = `assets/${name}-${theme}.svg`;
+    pic.appendChild(img);
+    if (href) {
+      const a = document.createElement('a');
+      a.href = href; a.appendChild(pic); root.appendChild(a);
+    } else {
+      root.appendChild(pic);
+    }
+  }
+}
+</script>
+</body>
+</html>
